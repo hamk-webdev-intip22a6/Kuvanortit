@@ -22,8 +22,8 @@ from account.views import SignUpView
 
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    # path('gallerino/', include('gallerino.urls')),
+    path('admin/', admin.site.urls),
+    path('gallerino/', include('gallerino.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
