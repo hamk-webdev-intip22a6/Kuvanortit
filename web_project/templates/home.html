@@ -4,6 +4,7 @@
 <p>User logged in: {{ user }}</p>
 <form method="post" action="{% url 'logout' %}">
   {% csrf_token %}
+  <button type="button" onclick="location.href = '/gallerino'">Proceed</button>
   <button type="submit">Log out</button>
 </form>
 {% else %}
@@ -11,9 +12,11 @@
 <p><a href="{% url 'login' %}">Login</a></p>
 <p><a href="{% url 'signup' %}">Create a new Account</a></p>
 {% endif %}
-<h2>Apps Gallery</h2>
 {% comment %}
+<!-- <h2>Apps Gallery</h2>
+
 <ul>
-  <li><a href="{% url 'Gallerino:index' %}">Gallerino</a></li>
-</ul>
-{% endcomment %} {% endblock %}
+  <li><a href="{% url 'Gallerino' %}">Gallerino</a></li>      Tässä toistaiseksi jos tarvii
+</ul> -->
+{% endcomment %}
+ {% endblock %}
