@@ -1,36 +1,28 @@
-{%comment%}
-{% extends 'base.html' %} {% block content %}
-<h1>Gallerino</h1>
-<button></button>
-
-
-{% endblock %}
-{%endcomment%}
-
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>gallerino</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-        </script>
-    </head>
-    <body>
-        <div class="col-md-12">
-            <h1>Gallerino</h1>
-            <p><a href="{% url 'gallerino:image_upload' %}">Upload more images</a></p>
-        </div>
-        {% for post in posts %}
-        <div class="col-md-4">
-            <p>{{ post.description }}</p>
-            <img src="{{ post.image.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
-        </div>
-        {% endfor %}
+<head>
+    <meta charset="UTF-8">
+    <title>gallerino</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
-    </body>
+
+
+<body>
+<div class="col-md-12">
+    <h1>Gallerino</h1>
+    <p><a href="{% url 'gallerino:create_gallery' %}">Create a gallery for your photos</a></p>
+</div>
+{% for gallery in galleries %}
+<div class="col-md-4">
+    <h3>{{ gallery.title }}</h3>
+    <img src="{{ gallery.thumbnail.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+    <p>TESTI</p>
+</div>
+{% endfor %}
+
+</body>
 </html>

@@ -1,0 +1,8 @@
+h1>Gallery Creation</h1>
+<form method = "post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+</form>
+
+<p><a href="{% url 'gallerino:image_upload' %}">Go back to main page</a></p>
