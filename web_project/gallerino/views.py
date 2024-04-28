@@ -18,10 +18,11 @@ def display_galleries(request):
         return render(request, 'gallerino/index.html', {'galleries' : galleries})
 
 
-def display_images(request):
+def display_images(request, pk):
     if request.method == "GET":
         posts = Post.objects.all()
-        return render(request, 'gallerino/gallery.html', {'posts' : posts})
+        gallery = get_object_or_404(Gallery, pk=pk)
+        return render(request, 'gallerino/gallery.html', {'posts' : posts, 'gallery' : gallery})
     
 
 
