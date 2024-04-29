@@ -18,7 +18,7 @@
 </div>
 {% for gallery in galleries %}
 <div class="col-md-4">
-    <a href="{% url 'gallerino:display_images' gallery.pk %}">
+    <a href="{% url 'gallerino:display_images' gallery_id=gallery.id %}">
     <h3>{{ gallery.title }}</h3>
     <img src="{{ gallery.thumbnail.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
     </a>

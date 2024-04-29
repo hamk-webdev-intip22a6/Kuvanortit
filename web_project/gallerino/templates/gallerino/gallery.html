@@ -15,7 +15,7 @@
     <div class="col-md-12">
         <h1>Gallerino</h1>
         <h2>{{gallery.title}}</h2>
-        <p><a href="{% url 'gallerino:image_upload' %}">Upload more images</a></p>
+        <p><a href="{% url 'gallerino:image_upload' gallery_id=gallery.id %}">Upload more images</a></p>
         <p><a href="{% url 'gallerino:display_galleries' %}">Go to main page</a></p>
     </div>
     {% for post in posts %}
