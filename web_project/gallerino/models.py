@@ -11,6 +11,7 @@ class Gallery (models.Model):
     thumbnail = models.ImageField(upload_to='images/', default='gallerino_thumbnail_placeholder.png')
     pub_date = models.DateTimeField('Date published', auto_now_add=True)
     mod_date = models.DateTimeField('Date modified', auto_now=True)
+    placeholder = models.BooleanField(default=True)
     
 
 
