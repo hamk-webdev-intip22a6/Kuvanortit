@@ -135,3 +135,15 @@ def success(request, gallery_id):
     return render(request, 'gallerino/success.html', {'gallery': gallery})
    
    
+
+
+
+@login_required
+def delete_image(request, image_id):
+    if request.method == 'POST':
+        image = get_object_or_404(Post, pk=image_id)
+        gallery_id = image.gallery.pk
+        image.delete()
+        return redirect('gallerino:display_images', gallery_id=gallery_id)
+
+

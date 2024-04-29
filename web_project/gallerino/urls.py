@@ -16,5 +16,6 @@ urlpatterns = [
     path('image_upload/<int:gallery_id>/', image_upload, name = 'image_upload'),
     path('gallery_success/<int:gallery_id>', gallery_success, name = 'gallery_success'),
     path('success/<int:gallery_id>', success, name = 'success'),
+    path('delete/<int:image_id>/', delete_image, name='delete_image'),
 
 ]

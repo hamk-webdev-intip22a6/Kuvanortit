@@ -14,24 +14,3 @@ class SignUpView(generic.CreateView):
     template_name = 'registration/signup.html'
 
 
-# class LogInView(generic.CreateView):
-#     def login_view(request):
-#         if request.method == 'POST':
-#             form = UserCreationForm(request.POST)
-#             if form.is_valid():
-#                 username = form.cleaned_data['username']
-#                 password = form.cleaned_data['password']
-#                 user = authenticate(request, username=username, password=password)
-#                 if user is not None:
-#                     login(request, user)
-#                     # Redirect to a success page.
-#                     return redirect('gallerino/')
-#                 else:
-#                     # Redirect to a failure page (e.g., login page with error message).
-#                     return redirect('')
-#         else:
-#             form = UserCreationForm()
-#         return render(request, 'login.html', {'form': form})
-
-
-
