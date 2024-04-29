@@ -65,18 +65,26 @@ from .models import Post, Gallery
 from .forms import UploadForm, GalleryForm
 from django.http import HttpResponse
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
+
+
+@login_required
 def display_galleries(request):
     if request.method == "GET":
-        galleries = Gallery.objects.all()
+        galleries = Gallery.objects.filter(user = request.user)
         return render(request, 'gallerino/index.html', {'galleries': galleries})
 
+
+@login_required
 def display_images(request, gallery_id):
     if request.method == "GET":
-        posts = Post.objects.all()
         gallery = get_object_or_404(Gallery, pk=gallery_id)
+        posts = Post.objects.filter(gallery = gallery)
         return render(request, 'gallerino/gallery.html', {'posts': posts, 'gallery': gallery})
 
+
+@login_required
 def create_gallery(request):
     if request.method == 'POST':
         form = GalleryForm(request.POST, request.FILES)
@@ -88,6 +96,7 @@ def create_gallery(request):
     return render(request, 'gallerino/gallery_creation.html', {'form': form})
 
 
+@login_required
 def image_upload(request, gallery_id):
     gallery = get_object_or_404(Gallery, pk=gallery_id)
     if request.method == 'POST':
@@ -102,16 +111,15 @@ def image_upload(request, gallery_id):
     return render(request, 'gallerino/upload.html', {'form': form, 'gallery': gallery})
 
 
+
+@login_required
 def gallery_success(request, gallery_id):
     gallery = get_object_or_404(Gallery, pk=gallery_id)
     return render(request, 'gallerino/gallery_success.html', {'gallery': gallery})
 
-# def success(request):
-#     gallery_id = request.session.get('gallery_id')
-#     gallery = get_object_or_404(Gallery, pk = gallery_id)
-#     return render(request, 'gallerino/success.html', {'gallery' : gallery})
 
 
+@login_required
 def success(request, gallery_id):
     gallery = get_object_or_404(Gallery, pk=gallery_id)
     return render(request, 'gallerino/success.html', {'gallery': gallery})
