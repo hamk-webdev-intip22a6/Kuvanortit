@@ -5,7 +5,7 @@ from .forms import UploadForm, GalleryForm
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from PIL import Image
+from PIL import Image, ImageSequence
 from django.conf import settings
 from django.core.files.base import ContentFile
 import os
@@ -30,29 +30,42 @@ def display_images(request, gallery_id):
 
 
 
+from PIL import Image, ImageSequence
 
 def resize_image(image_file, size=(500, 500), quality=95):
-    """
-    Resize the uploaded image to the specified size and quality.
-    """
-    # Open the image file
     with Image.open(image_file) as image:
-        # Resize the image
-        resized_image = image.resize(size)
-        # Convert the image to RGB mode if it's not already
-        if resized_image.mode != 'RGB':
+        if image.format == 'PNG':
+            rgba_image = image.convert('RGBA')
+            background = Image.new('RGBA', rgba_image.size, (255, 255, 255))
+            resized_image = Image.alpha_composite(background, rgba_image)
+            resized_image = resized_image.resize(size)
             resized_image = resized_image.convert('RGB')
-        # Create a BytesIO object to store the resized image data
+        elif image.format == 'GIF':
+            frames = []
+            for frame in ImageSequence.Iterator(image):
+                resized_frame = frame.resize(size)
+                resized_frame = resized_frame.convert('RGB')  # Convert GIF frames to RGB
+                frames.append(resized_frame)
+            resized_image = frames[0] if len(frames) == 1 else frames
+        else:
+            resized_image = image.resize(size)
+            if resized_image.mode != 'RGB':
+                resized_image = resized_image.convert('RGB')
+
         resized_image_io = BytesIO()
-        # Save the resized image to the BytesIO object with the specified quality
-        resized_image.save(resized_image_io, format='JPEG', quality=quality)
-        # Seek to the beginning of the BytesIO object
+        if image.format == 'GIF':
+            resized_image[0].save(resized_image_io, format='GIF', save_all=True, append_images=resized_image[1:], quality=quality)
+        elif image.format == 'PNG':
+            resized_image.save(resized_image_io, format='PNG', optimize=True, quality=quality)
+        else:
+            resized_image.save(resized_image_io, format='JPEG', quality=quality)
+
         resized_image_io.seek(0)
-        # Create a ContentFile object containing the resized image data
         resized_image_content = ContentFile(resized_image_io.getvalue())
-        # Set the ContentFile object's name attribute to the original image's name
         resized_image_content.name = image_file.name
         return resized_image_content
+
+
 
 
 @login_required
