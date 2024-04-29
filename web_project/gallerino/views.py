@@ -64,7 +64,7 @@ def create_gallery(request):
 
             if 'thumbnail' in request.FILES:
                 thumbnail_file = request.FILES['thumbnail']
-                resized_thumbnail = resize_image(thumbnail_file, size=(50, 50), quality=100)
+                resized_thumbnail = resize_image(thumbnail_file, size=(500, 500), quality=100)
                 gallery.thumbnail = resized_thumbnail
             else:
                 # Set default thumbnail
