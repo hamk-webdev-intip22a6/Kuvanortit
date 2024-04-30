@@ -35,6 +35,10 @@
             <div class="col-md-4">
                 <p>{{ post.description }}</p>
                 <img src="{{ post.image.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+                <form method="post" action="{% url 'gallerino:delete_image' image_id=post.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Delete Image</button>
+                </form>
             </div>    
             {% endfor %}
         </div>
