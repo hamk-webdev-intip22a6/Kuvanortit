@@ -1,44 +1,44 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Gallerino</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-{% block stylesheet %}
-<style>
-    body{
-        text-align: center;
-    }
-    .col-md-12{
-        background-color:white;
-        background-color: #f5f6f8;
-    }
-</style>
-{% endblock %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Gallerino</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
 
-<body>
-<div class="col-md-12">
-    <h1>Gallerino</h1>
-    <p><a href="{% url 'gallerino:create_gallery' %}">Create a gallery for your photos</a></p>
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Log out</button>
-    </form>
-</div>
-{% for gallery in galleries %}
-<div class="col-md-4">
-    <a href="{% url 'gallerino:display_images' gallery_id=gallery.id %}">
-    <h3>{{ gallery.title }}</h3>
-    <img src="{{ gallery.thumbnail.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
-    </a>
-</div>
-{% endfor %}
+    {% block stylesheet %}
+    <style>
+        body{
+            text-align: center;
+            background-color: #f5f6f8;
+        }
+        .col-md-12{
+            background-color:white;
+        }
+    </style>
+    {% endblock %}
 
-</body>
+    <body>
+        <div class="col-md-12">
+            <h1>Gallerino</h1>
+            <p><a href="{% url 'gallerino:create_gallery' %}">Create a gallery for your photos</a></p>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+            </form>
+        </div>
+        {% for gallery in galleries %}
+        <div class="col-md-4">
+            <a href="{% url 'gallerino:display_images' gallery_id=gallery.id %}">
+            <h3>{{ gallery.title }}</h3>
+            <img src="{{ gallery.thumbnail.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+            </a>
+        </div>
+        {% endfor %}
+
+    </body>
 </html>
