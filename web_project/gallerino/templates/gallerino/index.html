@@ -26,6 +26,10 @@
 <div class="col-md-12">
     <h1>Gallerino</h1>
     <p><a href="{% url 'gallerino:create_gallery' %}">Create a gallery for your photos</a></p>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Log out</button>
+    </form>
 </div>
 {% for gallery in galleries %}
 <div class="col-md-4">
