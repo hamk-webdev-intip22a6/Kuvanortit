@@ -1,3 +1,28 @@
-<p>Gallery created! What would you like to do next?</p>
-<p><a href="{% url 'gallerino:image_upload' gallery_id=gallery.id %}">add images to gallery</a></p>
-<p><a href="{% url 'gallerino:display_galleries' %}">Go back to main page</a></p>
+<head>
+    <meta charset="UTF-8">
+    <title>Gallerino - Create</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body{
+            text-align:center;
+            background-color: #f5f6f8;
+        }
+        #view {
+            margin: 0 auto;
+            margin-top: 70px;
+            max-width: 50%;
+            background-color: white;
+            font-size: 20px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="view"> 
+        <p>Gallery created! What would you like to do next?</p>
+        <p><a href="{% url 'gallerino:image_upload' gallery_id=gallery.id %}">Add images to gallery</a></p>
+        <p><a href="{% url 'gallerino:display_galleries' %}">Go back to main page</a></p>
+    </div>
+</body>

@@ -1,4 +1,26 @@
-<p>Thank you for uploading an image. I hope you didn't break any copyright laws.</p>
-<p><a href="{% url 'gallerino:image_upload' gallery_id=gallery.id%}">Upload more images</a></p>
-<p><a href="{% url 'gallerino:display_images' gallery_id=gallery.id %}">Go to the gallery you added a new image to</a></p>
-<p><a href="{% url 'gallerino:display_galleries' %}">Go back to main page</a></p>
+<head>
+    <meta charset="UTF-8">
+    <title>Gallerino - Create</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body{
+            text-align:center;
+            background-color: #f5f6f8;
+        }
+        #view {
+            margin: 0 auto;
+            margin-top: 70px;
+            max-width: 50%;
+            background-color: white;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+    </style>
+</head>
+<div id="view">
+    <h3>Thank you for uploading an image. I hope you didn't break any copyright laws.</h3>
+    <p><a href="{% url 'gallerino:image_upload' gallery_id=gallery.id%}">Upload more images</a></p>
+    <p><a href="{% url 'gallerino:display_images' gallery_id=gallery.id %}">Go to the gallery you added a new image to</a></p>
+    <p><a href="{% url 'gallerino:display_galleries' %}">Go back to main page</a></p>
+</div>
