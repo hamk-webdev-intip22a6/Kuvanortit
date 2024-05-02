@@ -74,7 +74,7 @@ def create_gallery(request):
         form = GalleryForm(request.POST, request.FILES)
         if form.is_valid():
             gallery = form.save(commit = False)
-
+            gallery.user = request.user
             if 'thumbnail' in request.FILES:
                 thumbnail_file = request.FILES['thumbnail']
                 resized_thumbnail = resize_image(thumbnail_file, size=(500, 500), quality=100)
