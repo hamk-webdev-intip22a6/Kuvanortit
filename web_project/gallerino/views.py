@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Gallery
 from .forms import UploadForm, GalleryForm
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from PIL import Image, ImageSequence
@@ -30,7 +30,7 @@ def display_images(request, gallery_id):
 
 
 
-from PIL import Image, ImageSequence
+# from PIL import Image, ImageSequence
 
 def resize_image(image_file, size=(500, 500), quality=95):
     with Image.open(image_file) as image:
